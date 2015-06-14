@@ -8,12 +8,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Главная страница</title>
 </head>
 <body>
-<%@ include file="auth.jsp" %>
-<% if (login != null && login.length() != 0) {
+<h1>Главная страница</h1>
+<div style="border: 3px;">
+  <% String login = "";
+      Cookie[] cookies = request.getCookies();
+      if (cookies != null) {
+          for (Cookie cookie: cookies) {
+              if (cookie.getName().equals("login")) {
+                  login = cookie.getValue();
+              }
+          }
+      }
+    if (login == null || login.length() == 0) {%>
+  <form action="/auth" method="post">
+    <input type="text" placeholder="Логин" name="login" required>
+    <input type="password" placeholder="Пароль" name="password" required>
+    <button type="submit">Вход</button>
+    <a href="registration.jsp">Регистрация</a>
+  </form>
+  <%} else { %>
+  <h3>Здравствуйте, <%=login%></h3><br>
+    <a href="/exit">Выход</a>
+  <%}%>
+</div> <br>
+<% if (login != null && login.length() != 0) {%>
 <%@ include file="add.jsp" %>
-}%>
+<%}%>
 </body>
 </html>

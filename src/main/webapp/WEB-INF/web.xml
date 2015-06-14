@@ -22,4 +22,22 @@
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>auth</servlet-name>
+        <servlet-class>ru.ifmo.alekseyivashin.chat_servlet.servlets.Auth</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auth</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>exit</servlet-name>
+        <servlet-class>ru.ifmo.alekseyivashin.chat_servlet.servlets.Exit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exit</servlet-name>
+        <url-pattern>/exit</url-pattern>
+    </servlet-mapping>
+
 </web-app>

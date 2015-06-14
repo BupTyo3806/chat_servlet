@@ -6,6 +6,7 @@
     <title>Регистрация</title>
 </head>
 <body >
+<h1>Регистрация</h1>
         <form action="/registration" method="post">
             <input type="text" placeholder="Логин" name="login" required>
             <input type="password" placeholder="Пароль" name="password" required>

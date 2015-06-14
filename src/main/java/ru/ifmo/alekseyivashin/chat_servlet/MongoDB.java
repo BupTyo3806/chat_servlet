@@ -38,11 +38,18 @@ public class MongoDB {
         recordTable.insert(document);
     }
 
-    public User findUser() throws UnknownHostException {
+    public User findUser(String login) throws UnknownHostException {
         init();
-        DBObject query = userTable.findOne();
-        User user = new User(query.get("login").toString(), query.get("password").toString());
-        return user;
+        BasicDBObject query = new BasicDBObject();
+        query.put("login", login);
+        DBCursor cursor = userTable.find(query);
+        if (cursor.count() == 0) {
+            return null;
+        } else {
+            DBObject obj = cursor.next();
+            User user = new User(obj.get("login").toString(), obj.get("password").toString());
+            return user;
+        }
     }
 
     public Record findRecord() throws UnknownHostException {
