@@ -40,4 +40,13 @@
         <url-pattern>/exit</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>add</servlet-name>
+        <servlet-class>ru.ifmo.alekseyivashin.chat_servlet.servlets.Add</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>add</servlet-name>
+        <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+
 </web-app>

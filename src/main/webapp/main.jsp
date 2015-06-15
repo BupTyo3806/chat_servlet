@@ -1,3 +1,5 @@
+<%@ page import="ru.ifmo.alekseyivashin.chat_servlet.Record" %>
+<%@ page import="java.io.PrintWriter" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alexey
@@ -37,5 +39,13 @@
 <% if (login != null && login.length() != 0) {%>
 <%@ include file="add.jsp" %>
 <%}%>
+<br>
+<% Record[] records = (Record[]) request.getSession().getAttribute("records");
+    if (records != null) {
+        for (Record record: records) {
+            out.println(record.getLogin() + ": " + record.getText() + " &middot " + record.getDate());
+        }
+    }
+%>
 </body>
 </html>

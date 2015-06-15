@@ -4,6 +4,8 @@ import com.mongodb.*;
 import com.mongodb.util.JSON;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -52,10 +54,21 @@ public class MongoDB {
         }
     }
 
-    public Record findRecord() throws UnknownHostException {
+    public Record[] findAllRecords() throws UnknownHostException {
         init();
-        DBObject query = recordTable.findOne();
-        Record record = new Record(query.get("login").toString(), query.get("text").toString(), query.get("date").toString());
-        return record;
+        DBCursor cursor = recordTable.find();
+        if (cursor.count() == 0) {
+            return null;
+        }
+        List<Record> recordList = new ArrayList<Record>();
+        while (cursor.hasNext()) {
+            DBObject obj = cursor.next();
+            String login = obj.get("login").toString();
+            String text = obj.get("text").toString();
+            String date = obj.get("date").toString();
+            recordList.add(new Record(login, text, date));
+        }
+        Record[] records = recordList.toArray(new Record[recordList.size()]);
+        return records;
     }
 }
