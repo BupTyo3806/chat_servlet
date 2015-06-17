@@ -37,6 +37,10 @@ public class Add extends HttpServlet {
         Record record = new Record(login, text, date);
         MongoDB db = new MongoDB();
         db.addRecord(record);
-        res.sendRedirect("/");
+        //res.sendRedirect("/");
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        res.getWriter().write(record.toJSONString());
     }
+
 }

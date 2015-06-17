@@ -6,11 +6,12 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <style type="text/css">
         body {
             padding-top: 40px;
             padding-bottom: 40px;
-            background-color: #CCFFCC;
+            background-color: #c8c3c8;
         }
 
         .form-signin, .form-main, .form-head {
@@ -45,6 +46,20 @@
     </style>
 </head>
 <body>
+<script>
+        $(document).ready(function(){
+            $('#btnSubmit').click(function(event){
+                var inputText = $('#inputText').val();
+                $.post("/add", {text: inputText}, function(resp) {
+                    var login = JSON.parse(resp).login;
+                    var text = JSON.parse(resp).text;
+                    var date = JSON.parse(resp).date;
+                    var stringRecord = "<h4>" + login + " &middot " + text + " <small>" + date + "</small>";
+                    $('#main-form').append(stringRecord);
+                });
+            });
+        });
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -74,7 +89,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="form-main">
+            <div class="form-main" id="main-form">
                 <% if (login != null && login.length() != 0) {%>
                 <%@ include file="add.jsp" %>
                 <%}%>
