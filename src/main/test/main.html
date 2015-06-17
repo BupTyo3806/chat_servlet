@@ -1,4 +1,3 @@
-<%@ page import="ru.ifmo.alekseyivashin.chat_servlet.Record" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -49,43 +48,29 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-main">
-                <% String login = "";
-                    Cookie[] cookies = request.getCookies();
-                    if (cookies != null) {
-                        for (Cookie cookie: cookies) {
-                            if (cookie.getName().equals("login")) {
-                                login = cookie.getValue();
-                            }
-                        }
-                    }
-                    if (login == null || login.length() == 0) {%>
                 <form class="form-inline" role="form" action="/auth" method="post">
-                    <input type="text" class="form-control" placeholder="Username" name="login" style="width: 245px;" required>
-                    <input type="password" class="form-control" placeholder="Password" name="password" style="width: 245px;" required>
-                    <button type="submit" class="btn btn-default">Sign in</button>
-                    <a href="/registration.jsp" class="btn btn-warning">Sign up</a>
+                    <input type="text" class="form-control" placeholder="Логин" name="login" style="width: 245px;" required>
+                    <input type="password" class="form-control" placeholder="Пароль" name="password" style="width: 245px;" required>
+                    <button type="submit" class="btn btn-default">Войти</button>
+                    <a href="#" class="btn btn-warning">Регистрация</a>
                 </form>
-                <%} else { %>
-                <h3>Welcome, <%=login%></h3>
-                <a href="/exit" class="btn btn-danger btn-lg">Log out</a>
-                <%}%>
+                <h3>Здравствуйте, 123!</h3>
+                <a href="#" class="btn btn-danger btn-lg">Выход</a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-main">
-                <% if (login != null && login.length() != 0) {%>
-                <%@ include file="add.jsp" %>
-                <%}%>
+                <form class = "form-inline" action="/add" method="post">
+                    <input type="text" class="form-control" placeholder="Введите ваше сообщение здесь..." name="peach" style="height: 35px; width: 85%" required>
+                    <button class="btn btn-primary" type="submit">Отправить</button>
+                </form>
                 <br>
-                <% Record[] records = (Record[]) request.getSession().getAttribute("records");
-                    if (records != null) {
-                        for (Record record: records) {
-                            out.println("<h4>" + record.getLogin() + " &middot " + record.getText() + " <small>" + record.getDate() + "</small>");
-                        }
-                    }
-                %>
+                <h4>Логин &middot Текст <small>дата</small></h4>
+                <h4>Логин &middot Текст <small>дата</small></h4>
+                <h4>Логин &middot Текст <small>дата</small></h4>
+                <h4>Логин &middot Текст <small>дата</small></h4>
             </div>
         </div>
     </div>
